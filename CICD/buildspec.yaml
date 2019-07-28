@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+        python: 3.7
+    commands: 
+      - pip3 install awscli # Installing AWS CLI for validating template
+  build:
+    commands:
+      - aws cloudformation validate-template --template-body file://CFT.yaml # Validate CFT Template
+      - python -m py_compile lambda_handler.py # Python Syntax Validation
+      - zip lambda_handler.zip lambda_handler.py # Create Zip for S3 upload
+      - aws s3 cp lambda_handler.zip s3://krutik-pipeline/lambda_handler.zip # Zip should be uploaded to S3
+artifacts:
+  files: 
+    - '**/*'
