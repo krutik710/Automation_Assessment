@@ -246,8 +246,8 @@ module "private_ec2" {
     /sbin/service mysqld start
     mysqladmin -u root password 'toor'
     RDS_MYSQL_ENDPOINT="${element(split(":", aws_db_instance.krutik_RDS.endpoint), 0)}";
-    RDS_MYSQL_USER="krutikJain";
-    RDS_MYSQL_PASS="Qwerty12";
+    RDS_MYSQL_USER="krutik";
+    RDS_MYSQL_PASS="pass@123";
     RDS_MYSQL_BASE="krutik-db";
     mysql -h $RDS_MYSQL_ENDPOINT -u $RDS_MYSQL_USER -p$RDS_MYSQL_PASS -D $RDS_MYSQL_BASE -e 'quit';
     if [[ $? -eq 0 ]]; then
